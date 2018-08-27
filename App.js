@@ -16,7 +16,7 @@ export default class App extends React.Component {
     let page;
     switch(this.state.page){
       case "list":
-        page = <List/>;
+        page = <List />;
         break;
 
       default :
@@ -26,18 +26,18 @@ export default class App extends React.Component {
 
 
     return (
-      <View style={styles.container}>
-        {page}
-      </View>
-    );
+        <View style={styles.container}>
+          {page}
+        </View>
+      );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'blue',
-    alignItems: 'center',
+    backgroundColor: '#fff',
+    alignItems: 'flex-start',
     justifyContent: 'center',
   },
 });

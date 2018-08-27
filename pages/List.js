@@ -2,14 +2,13 @@ import React from "react";
 import { StyleSheet, Text, View } from 'react-native';
 
 //import {Excerpt, Menu, Search} from "../components";
-//import {tp} from "../com/app.js";
+import {tp} from "../com/app.js";
 
 export default class List extends React.Component {
    
     state = {
         posts: []
     }
-
 
     render(){
         console.log("List 렌더링..");
@@ -23,12 +22,11 @@ export default class List extends React.Component {
 }
 
 
-
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: 'red',
-      alignItems: 'center',
+      backgroundColor: '#ddd',
+      alignItems: 'flex-start',
       justifyContent: 'center',
     },
   });

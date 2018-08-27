@@ -1,10 +1,10 @@
 console.log("tp.js start");
 
-import action from "./redux/action";
-import {api} from "./restful/api";
+import action from "../redux/action";
+import {api} from "../restful/api";
 import shortid from "shortid";
-import $m from "../com/util";
-import nprogress from "nprogress";
+import $m from "./util";
+//import nprogress from "nprogress";
 import React from "react";
 
 
@@ -18,7 +18,7 @@ export let tp = {
   store: undefined,   // List 컴포넌트가 호출될 때 store 가 초기화된다.
   user: undefined,    // 로컬스토리지에 저장된 사용자 정보
   api,                // RESTful API
-  nprogress,          // 서버통신시 진행표시
+  //nprogress,          // 서버통신시 진행표시
   isScrollLast: false, // 세로 스크롤이 마지막까지 도달했는지 여부
   temp : undefined,   // 컴포넌트간 정보 전달을 위한 임시 저장 공간
   $m,                  // 기본 유틸함수
@@ -48,8 +48,8 @@ tp.bodyScroll = function () {
 
 
   if ((scrollTop + clientHeight) == scrollHeight) { //스크롤이 마지막일때
-    nprogress.start();
-    $m("#nprogress .spinner").css("top", "95%");
+    //nprogress.start();
+    //$m("#nprogress .spinner").css("top", "95%");
     tp.api.getPosts({
         //idx: tp.view.App.state.data.posts.length,
         idx: tp.store.getState().data.posts.filter(p => p.origin === undefined).length,
