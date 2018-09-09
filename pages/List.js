@@ -15,6 +15,18 @@ export default class List extends React.Component {
 
         return (
             <View style={styles.container}>
+                <Text>목록 화면 무궁화꼬치 피었습니다</Text>
+                <Text>목록 화면</Text>
+                <Text>목록 화면</Text>
+                <Text>목록 화면</Text>
+                <Text>목록 화면</Text>
+                <Text>목록 화면</Text>
+                <Text>목록 화면</Text>
+                <Text>목록 화면</Text>
+                <Text>목록 화면</Text>
+                <Text>목록 화면</Text>
+                <Text>목록 화면</Text>
+                <Text>목록 화면</Text>
                 <Text>목록 화면</Text>
             </View>
         );
@@ -24,10 +36,10 @@ export default class List extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
+      flex: 9,
       backgroundColor: '#ddd',
+      justifyContent: 'flex-start',
       alignItems: 'flex-start',
-      justifyContent: 'center',
     },
   });
   

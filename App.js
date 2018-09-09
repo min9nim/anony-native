@@ -1,6 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, StatusBar } from 'react-native';
 import {List} from "./pages";
+import {StatusBarBackground} from "./components";
+
 
 
 export default class App extends React.Component {
@@ -27,6 +29,10 @@ export default class App extends React.Component {
 
     return (
         <View style={styles.container}>
+          <StatusBarBackground style={{backgroundColor:'midnightblue'}}/>
+          <View style={styles.header}>
+            <Text>여기는 헤더입니다</Text>
+          </View>
           {page}
         </View>
       );
@@ -40,4 +46,8 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     justifyContent: 'center',
   },
+  header:{
+    flex:1,
+    backgroundColor: "red",
+  }
 });
