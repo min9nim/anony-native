@@ -30,9 +30,6 @@ export default class App extends React.Component {
     return (
         <View style={styles.container}>
           <StatusBarBackground style={{backgroundColor:'midnightblue'}}/>
-          <View style={styles.header}>
-            <Text>여기는 헤더입니다</Text>
-          </View>
           {page}
         </View>
       );
