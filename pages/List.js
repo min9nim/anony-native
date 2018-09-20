@@ -1,5 +1,11 @@
 import React from "react";
-import { StyleSheet, Text, View, ScrollView, ActivityIndicator } from 'react-native';
+import { StyleSheet,
+    Text,
+    View, 
+    ScrollView,
+    ActivityIndicator,
+    TouchableHighlight
+} from 'react-native';
 
 //import {Excerpt, Menu, Search} from "../components";
 import {tp} from "../com/app.js";
@@ -14,7 +20,8 @@ export default class List extends React.Component {
             posts: [],
             loading: false
         }
-        global.list = this;
+        global.view.list = this;
+        
     }
     
     async getPosts({idx, cnt, context}) {
@@ -45,26 +52,38 @@ export default class List extends React.Component {
         this.setState({posts : this.state.posts.concat(res.posts)})
     }
 
+    onPressTitle(e){
+        global.view.app.setState({page : "post", postKey: ""});
+    }
+
+    componentWillUnmount(){
+        global.state.posts = this.state.posts;
+
+    }
+
 
     render(){
         console.log("List 렌더링..");
 
         return (
             <View style={styles.container}>
-                <ScrollView style={styles.scrollView}
+            <Text>헬로 월드 </Text>
+                {/* <ScrollView style={styles.scrollView}
                             contentContainerStyle={styles.contentContainer}
                             onMomentumScrollEnd={this.scrollEnd}>
                     {this.state.posts.map(post => {
                         return (
+                        <TouchableHighlight onPress={this.onPressTitle} underlayColor="white">
                             <View key={post.key} style={styles.excerpt} >
                                 <Text style={styles.title}>{post.title}</Text>
                                 <Text style={styles.writer}>{post.writer} - {Date(post.date).substr(0,21)}</Text>
                             </View>
+                        </TouchableHighlight>
                         )
                     })}
                 </ScrollView>
                 {this.state.loading &&
-                    <ActivityIndicator size="large" color="#0000ff" style={styles.loading} />}
+                    <ActivityIndicator size="large" color="#0000ff" style={styles.loading} />} */}
             </View>
         );
     }
