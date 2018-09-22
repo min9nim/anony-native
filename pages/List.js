@@ -6,6 +6,11 @@ import { StyleSheet,
     ActivityIndicator,
     TouchableHighlight
 } from 'react-native';
+//import ReactNativeComponentTree from'react-native/Libraries/Renderer/src/renderers/native/ReactNativeComponentTree';
+import ReactNativeComponentTree from 'react-native/Libraries/Renderer/shims/ReactNativeComponentTree';
+
+//import ReactNativeComponentTree from'react-native';
+
 
 //import {Excerpt, Menu, Search} from "../components";
 import {tp} from "../com/app.js";
@@ -13,13 +18,15 @@ import {tp} from "../com/app.js";
 export default class List extends React.Component {
 
     constructor(props){
-        console.log("생성자 호출입니다");
+        console.log("List 생성자 호출입니다");
         super(props);
         this.scrollEnd = this.scrollEnd.bind(this);
         this.state = {
             posts: [],
             loading: false
         }
+        
+
         global.view.list = this;
         
     }
@@ -52,13 +59,12 @@ export default class List extends React.Component {
         this.setState({posts : this.state.posts.concat(res.posts)})
     }
 
-    onPressTitle(e){
-        global.view.app.setState({page : "post", postKey: ""});
+    onPressTitle(postKey){
+        global.view.app.setState({page : "post", postKey});
     }
 
     componentWillUnmount(){
-        global.state.posts = this.state.posts;
-
+        //global.state.posts = this.state.posts;
     }
 
 
@@ -67,14 +73,13 @@ export default class List extends React.Component {
 
         return (
             <View style={styles.container}>
-            <Text>헬로 월드 </Text>
-                {/* <ScrollView style={styles.scrollView}
+                <ScrollView style={styles.scrollView}
                             contentContainerStyle={styles.contentContainer}
                             onMomentumScrollEnd={this.scrollEnd}>
                     {this.state.posts.map(post => {
                         return (
-                        <TouchableHighlight onPress={this.onPressTitle} underlayColor="white">
-                            <View key={post.key} style={styles.excerpt} >
+                        <TouchableHighlight key={post.key} onPress={(e)=>{this.onPressTitle(post.key)}} underlayColor="white">
+                            <View style={styles.excerpt} >
                                 <Text style={styles.title}>{post.title}</Text>
                                 <Text style={styles.writer}>{post.writer} - {Date(post.date).substr(0,21)}</Text>
                             </View>
@@ -83,7 +88,7 @@ export default class List extends React.Component {
                     })}
                 </ScrollView>
                 {this.state.loading &&
-                    <ActivityIndicator size="large" color="#0000ff" style={styles.loading} />} */}
+                    <ActivityIndicator size="large" color="#0000ff" style={styles.loading} />}
             </View>
         );
     }

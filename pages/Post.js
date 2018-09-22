@@ -1,35 +1,52 @@
 import React from "react";
-import { StyleSheet, Text, View, ScrollView, ActivityIndicator } from 'react-native';
+import { StyleSheet, View, ScrollView, ActivityIndicator } from 'react-native';
+import {Button, Text} from 'native-base';
+import { Font } from "expo";
 
 //import {Excerpt, Menu, Search} from "../components";
 import {tp} from "../com/app.js";
 
-export default class List extends React.Component {
+export default class Post extends React.Component {
 
     constructor(props){
         console.log("Post 생성자 호출입니다");
         super(props);
         this.state = {
-            loading: false
+            loading: true
         }
     }
-    
+
+    async componentWillMount() {
+        await Font.loadAsync({
+            Roboto: require("native-base/Fonts/Roboto.ttf"),
+            Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf")
+        });
+        this.setState({ loading: false });
+    }    
+
+    goList(){
+        global.view.app.setState({page : "list"});
+    }
 
     render(){
         console.log("Post 렌더링..");
+        if (this.state.loading) {
+            return (
+                <ActivityIndicator size="large" color="#0000ff" style={styles.loading} />
+            );
+        }        
 
         return (
             <View style={styles.container}>
-                <ScrollView style={styles.scrollView}
-                            contentContainerStyle={styles.contentContainer}
-                            onMomentumScrollEnd={this.scrollEnd}>
-                    <Text>{this.props.post.title}</Text>
-                    <Text>{this.props.post.writer} - {Date(this.props.post.date).substr(0,21)}</Text>
-                    <Text>{this.props.post.content}</Text>
-                </ScrollView>
-                {this.state.loading &&
-                    <ActivityIndicator size="large" color="#0000ff" style={styles.loading} />}
-            </View>
+            <ScrollView style={styles.scrollView} contentContainerStyle={styles.contentContainer}>
+                <Text style={styles.title}>{this.props.post.title}</Text>
+                <Text style={styles.writer}>{this.props.post.writer} - {Date(this.props.post.date).substr(0,21)}</Text>
+                <Text style={styles.content}>{this.props.post.content}</Text>
+                <View style={styles.btnWrapper}>
+                    <Button success small style={styles.btn} onPress={this.goList}><Text> List </Text></Button><Button success small style={styles.btn}><Text> Write </Text></Button>
+                </View>
+            </ScrollView>
+        </View>                
         );
     }
 }
@@ -45,15 +62,17 @@ const styles = StyleSheet.create({
 
     scrollView: {
         width: "100%",
-        backgroundColor: '#eee',
+        backgroundColor: '#fff',
     },    
     title:{
-        fontSize: 18,
-        marginBottom: 5
+        fontSize: 30,
+        marginBottom: 5,
+        textAlign: "right"
     },
     writer: {
         color: "#aaa",
-        fontSize: 14
+        fontSize: 14,
+        marginBottom: 10
     },
     contentContainer: {
         paddingVertical: 20,
@@ -68,6 +87,15 @@ const styles = StyleSheet.create({
         bottom: 0,
         alignItems: 'center',
         justifyContent: 'center'
-      }
+    },
+    btnWrapper: {
+        marginTop: 10,
+        flexDirection: "row",
+    },
+    btn: {
+        marginRight: 5,
+    }
+
+
   });
   

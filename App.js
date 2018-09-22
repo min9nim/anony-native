@@ -1,30 +1,44 @@
 import React from 'react';
 import { StyleSheet, Text, View, StatusBar } from 'react-native';
-//import {List, Post} from "./pages";
-import {List} from "./pages";
+import {List, Post, Test} from "./pages";
 import {StatusBarBackground} from "./components";
 
 
 
 export default class App extends React.Component {
-  
-  state = {
-    page : "list",
-    context : "",
-    postKey : ""
+
+  constructor(props){
+    console.log("App 생성자 호출입니다");
+    super(props);
+    this.state = {
+      page : "list",
+      context : "",
+      postKey : ""
+    }
+
+    global.view = {};
+
+    global.view.app = this;
+
+
   }
+  
 
 
   render() {
-
+console.log("App 렌더링");
     let page;
     switch(this.state.page){
       case "post":
-        //page = <Post post={global.view.list.state.posts.filter(p => p.key === this.state.postKey)}/>;
+        page = <Post post={global.view.list.state.posts.find(p => p.key === this.state.postKey)}/>;
         break;
 
       case "list":
         page = <List />;
+        break;
+
+      case "test":
+        page = <Test />;
         break;
 
       default :
@@ -35,10 +49,8 @@ export default class App extends React.Component {
 
     return (
         <View style={styles.container}>
-            <Text>헬로 월드22 </Text>
-        
-          {/* <StatusBarBackground style={{backgroundColor:'midnightblue'}}/> */}
-          {/* {page} */}
+          <StatusBarBackground style={{backgroundColor:'midnightblue'}}/>
+          {page}
         </View>
       );
   }
