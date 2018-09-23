@@ -25,7 +25,7 @@ export default class Post extends React.Component {
     }    
 
     goList(){
-        global.view.app.setState({page : "list"});
+        tp.view.app.setState({page : "list"});
     }
 
     render(){

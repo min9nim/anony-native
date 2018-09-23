@@ -2,6 +2,10 @@ import React from 'react';
 import { StyleSheet, Text, View, StatusBar } from 'react-native';
 import {List, Post, Test} from "./pages";
 import {StatusBarBackground} from "./components";
+import {createStore} from "redux";
+import {reducer} from "./redux/reducer";
+import {tp} from "./com/app.js";
+
 
 
 
@@ -16,21 +20,34 @@ export default class App extends React.Component {
       postKey : ""
     }
 
-    global.view = {};
+    
 
-    global.view.app = this;
+    tp.view.app = this;
 
+
+    // 스토어 최초 한번 생성
+    tp.store = createStore(reducer, {
+        view: {
+          search: "",
+          uuid: "",
+        },
+        data: {
+          posts: [],        // 전체 글
+          comments: []     // 전체 댓글
+        }
+    });    
 
   }
   
 
 
   render() {
-console.log("App 렌더링");
+    console.log("App 렌더링");
+
     let page;
     switch(this.state.page){
       case "post":
-        page = <Post post={global.view.list.state.posts.find(p => p.key === this.state.postKey)}/>;
+        page = <Post post={tp.view.list.state.posts.find(p => p.key === this.state.postKey)}/>;
         break;
 
       case "list":
