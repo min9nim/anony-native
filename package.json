@@ -17,6 +17,7 @@
     "react-native": "https://github.com/expo/react-native/archive/sdk-29.0.0.tar.gz",
     "react-native-markdown-renderer": "^3.2.8",
     "react-native-markdown-view": "^1.1.4",
+    "react-native-simple-markdown": "^1.1.0",
     "redux": "^4.0.0",
     "remarkable": "^1.7.1",
     "shortid": "^2.2.13"

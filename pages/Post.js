@@ -2,9 +2,9 @@ import React from "react";
 import { StyleSheet, View, ScrollView, ActivityIndicator } from 'react-native';
 import {Button, Text} from 'native-base';
 import { Font } from "expo";
-//import Markdown from 'react-native-simple-markdown';
+import Markdown from 'react-native-simple-markdown';
 //import Markdown from 'react-native-markdown-renderer';
-import { MarkdownView } from 'react-native-markdown-view';
+//import { MarkdownView } from 'react-native-markdown-view';
 
 
 
@@ -25,7 +25,7 @@ export default class Post extends React.Component {
         await Font.loadAsync({
             Roboto: require("native-base/Fonts/Roboto.ttf"),
             Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
-            Courier : require("native-base/Fonts/Courier.ttf")
+            //Courier : require("native-base/Fonts/Courier.ttf")
         });
         this.setState({ loading: false });
     }    
@@ -50,7 +50,7 @@ export default class Post extends React.Component {
                 {
                     this.props.post.isMarkdown
                     ?
-                    <MarkdownView>{this.props.post.content}</MarkdownView>
+                    <Markdown styles={markdownStyles}>{this.props.post.content}</Markdown>
                     :
                     <Text style={styles.content}>{this.props.post.content}</Text>
                 }
@@ -125,4 +125,13 @@ const styles = StyleSheet.create({
     text: {
       color: '#555555',
     },
+    codeBlock: {
+        fontFamily: 'Roboto',
+        fontWeight: '500',
+    },
+    inlineCode: {
+        backgroundColor: 'rgba(128, 128, 128, 0.25)',
+        fontFamily: 'Roboto',
+        fontWeight: '500',
+      },    
   }
